@@ -1,6 +1,6 @@
-raspivid -md 2 -t 25000 -b 15000000 -o open.h264 &
+libcamera-vid -n -t 25000 -b 15000000 -o open.h264 &
 export RASPIVID_PID=$!
-echo Started raspivid
+echo Started libcamera-vid
 
 echo Opening sunshade
 python open.py
@@ -11,6 +11,6 @@ echo Stopping video
 kill $RASPIVID_PID
 
 echo Converting video
-ffmpeg -i open.h264 -c:v copy -r 15 -y open.mp4
+ffmpeg -i open.h264 -c:v copy open.mp4
 echo Cleaning up
 rm open.h264

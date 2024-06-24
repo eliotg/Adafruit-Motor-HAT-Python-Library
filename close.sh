@@ -1,13 +1,13 @@
-raspivid -md 2 -t 25000 -b 15000000 -o close.h264 &
+libcamera-vid -n -t 25000 -b 15000000 -o close.h264 &
 export RASPIVID_PID=$!
-echo Started raspivid
+echo Started libcamera-vid
 
 echo Closing sunshade
 python close.py
 
 echo Closed.  Waiting 1 sec before stopping video...
 sleep 1
-echo Stopping raspivid
+echo Stopping libcamera-vid
 kill $RASPIVID_PID
 
 echo Converting video
